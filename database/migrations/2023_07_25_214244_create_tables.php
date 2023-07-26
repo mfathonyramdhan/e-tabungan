@@ -22,23 +22,18 @@ class CreateTables extends Migration
             $table->timestamps();
         });
 
-        // Create accounts table
-        Schema::create('accounts', function (Blueprint $table) {
-            $table->id('acc_id');
-            $table->string('acc_unique_num');
-            $table->string('acc_birthplace');
-            $table->date('acc_datebirth');
-            $table->string('acc_name');
-            $table->string('acc_address');
-            $table->string('acc_phone');
-            $table->string('acc_religion');
-            $table->string('acc_gender');
-            $table->string('acc_email');
-            $table->string('acc_password');
-            $table->string('acc_class');
-            $table->unsignedBigInteger('id_role');
-            $table->unsignedBigInteger('id_cl');
-            $table->timestamps();
+        // Modify users table to include account-related columns
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('acc_unique_num')->nullable();
+            $table->string('acc_birthplace')->nullable();
+            $table->date('acc_datebirth')->nullable();
+            $table->string('acc_address')->nullable();
+            $table->string('acc_phone')->nullable();
+            $table->string('acc_religion')->nullable();
+            $table->string('acc_gender')->nullable();
+            $table->string('acc_class')->nullable();
+            $table->unsignedBigInteger('id_role')->nullable();
+            $table->unsignedBigInteger('id_cl')->nullable();
 
             $table->foreign('id_role')->references('role_id')->on('roles');
             $table->foreign('id_cl')->references('cl_id')->on('class_levels');
@@ -54,14 +49,35 @@ class CreateTables extends Migration
             $table->timestamp('datemodified')->nullable();
             $table->timestamps();
 
-            $table->foreign('id_acc')->references('acc_id')->on('accounts');
+            $table->foreign('id_acc')->references('id')->on('users'); // Reference users table
         });
     }
 
     public function down()
     {
-        // Drop the tables in reverse order (important for foreign key constraints)
+        // Drop the transactions table first to avoid foreign key constraint issues
         Schema::dropIfExists('transactions');
+
+        // Modify users table to drop added columns
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['id_role']);
+            $table->dropForeign(['id_cl']);
+
+            $table->dropColumn([
+                'acc_unique_num',
+                'acc_birthplace',
+                'acc_datebirth',
+                'acc_address',
+                'acc_phone',
+                'acc_religion',
+                'acc_gender',
+                'acc_class',
+                'id_role',
+                'id_cl',
+            ]);
+        });
+
+        // Drop the remaining tables
         Schema::dropIfExists('accounts');
         Schema::dropIfExists('class_levels');
         Schema::dropIfExists('roles');
