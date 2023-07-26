@@ -8,17 +8,17 @@
     <meta name="author" content="">
     <meta name="robots" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:title" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:description" content="Fillow : Fillow Saas Admin  Bootstrap 5 Template">
-    <meta property="og:image" content="https://fillow.dexignlab.com/xhtml/social-image.png">
+    <meta name="description" content="Created by DevSign Creative Solution">
+    <meta property="og:title" content="Created by DevSign Creative Solution">
+    <meta property="og:description" content="Created by DevSign Creative Solution">
+    <meta property="og:image" content="">
     <meta name="format-detection" content="telephone=no">
 
     <!-- PAGE TITLE HERE -->
-    <title>Admin Dashboard</title>
+    <title>Login - Pendidikan Integral Hidayatullah</title>
 
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}" draggable="false">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
@@ -35,34 +35,35 @@
                                     <div class="text-center mb-3">
                                         <a href="#"><img src="{{ asset('images/logo-full.png') }}" alt=""></a>
                                     </div>
-                                    <h4 class="text-center mb-4">Sign in your account</h4>
-                                    <form action="index.html') }}">
+                                    <h4 class="text-center mb-4">Login Aplikasi E-Tabungan </br> Pendidikan Integral Hidayatullah </h4>
+                                    <form method="POST" action="{{ route('login') }}">
+                                        @csrf
                                         <div class="mb-3">
-                                            <label class="mb-1"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" value="hello@example.com">
+                                            <label for="email" class="mb-1"><strong>Email</strong></label>
+                                            <input type="email" class="form-control" id="email" name="email" required autofocus placeholder="Masukkan email">
                                         </div>
                                         <div class="mb-3">
-                                            <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" value="Password">
+                                            <label for="password" class="mb-1"><strong>Password</strong></label>
+                                            <input type="password" class="form-control" placeholder="Masukkan password">
                                         </div>
                                         <div class="row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="mb-3">
+                                            <!-- <div class="mb-3">
                                                 <div class="form-check custom-checkbox ms-1">
                                                     <input type="checkbox" class="form-check-input" id="basic_checkbox_1">
                                                     <label class="form-check-label" for="basic_checkbox_1">Remember my preference</label>
                                                 </div>
-                                            </div>
-                                            <div class="mb-3">
+                                            </div> -->
+                                            <!-- <div class="mb-3">
                                                 <a href="page-forgot-password.html">Forgot Password?</a>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                                         </div>
                                     </form>
-                                    <div class="new-account mt-3">
+                                    <!-- <div class="new-account mt-3">
                                         <p>Don't have an account? <a class="text-primary" href="page-register.html">Sign up</a></p>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
