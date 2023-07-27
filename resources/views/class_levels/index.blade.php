@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Profile Datatable</h4>
+                    <h4 class="card-title">Data Satuan Pendidikan</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -16,7 +16,6 @@
                                     <th>No</th>
                                     <th>Nama Satuan Pendidikan</th>
                                     <th>Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,8 +25,17 @@
                                     <td>{{ $classLevel->cl_name }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fas fa-pencil-alt"></i></a>
-                                            <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            <!-- Pass the 'id' parameter to the edit route -->
+                                            <a href="{{ route('class-levels.edit', ['id' => $classLevel->cl_id]) }}" class="btn btn-primary shadow sharp me-1" style="padding-left: 10px; padding-right: 10px;">
+                                                <i class="fas fa-pencil-alt"></i> &nbsp;Edit
+                                            </a>
+                                            <form action="{{ route('class-levels.destroy', ['id' => $classLevel->cl_id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this class level?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger shadow sharp" style="padding-left: 10px; padding-right: 10px;">
+                                                    <i class="fa fa-trash"></i>&nbsp;Hapus
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
@@ -38,7 +46,6 @@
                                     <th>No</th>
                                     <th>Nama Satuan Pendidikan</th>
                                     <th>Aksi</th>
-
                                 </tr>
                             </tfoot>
                         </table>

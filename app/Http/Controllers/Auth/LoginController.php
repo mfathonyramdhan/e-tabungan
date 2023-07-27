@@ -10,6 +10,10 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if (auth()->check()) {
+            return redirect('/dashboard'); // Redirect to the dashboard if the user is already logged in.
+        }
+
         return view('auth/login');
     }
 
