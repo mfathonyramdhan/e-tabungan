@@ -15,10 +15,9 @@
     <meta name="format-detection" content="telephone=no">
 
     <!-- PAGE TITLE HERE -->
-    <title>Login - Pendidikan Integral Hidayatullah</title>
-
+    <title>E-Tabungan | Login</title>
     <!-- FAVICONS ICON -->
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}" draggable="false">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
 </head>
@@ -33,18 +32,33 @@
                             <div class="col-xl-12">
                                 <div class="auth-form">
                                     <div class="text-center mb-3">
-                                        <a href="#"><img src="{{ asset('images/logo-full.png') }}" alt=""></a>
+                                        <a href="#"><img src="{{ asset('images/logo-full.png') }}" alt="" draggable="false"></a>
                                     </div>
                                     <h4 class="text-center mb-4">Login Aplikasi E-Tabungan </br> Pendidikan Integral Hidayatullah </h4>
+                                    @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                    @endif
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="email" class="mb-1"><strong>Email</strong></label>
                                             <input type="email" class="form-control" id="email" name="email" required autofocus placeholder="Masukkan email">
+                                            @error('acc_email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label for="password" class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" placeholder="Masukkan password">
+                                            <input type="password" id="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                                            @error('acc_password')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                         <div class="row d-flex justify-content-between mt-4 mb-2">
                                             <!-- <div class="mb-3">

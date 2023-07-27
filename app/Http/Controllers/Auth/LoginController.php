@@ -23,9 +23,17 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/dashboard'); // Replace '/dashboard' with your desired redirect route after login.
+            return redirect()->intended('/dashboard'); // Replace '/dashboard' with your desired redirect route after login. 
         } else {
             return back()->withErrors(['email' => 'Invalid credentials. Please try again.']);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        // Redirect to the login page after logout
+        return redirect()->route('login');
     }
 }
