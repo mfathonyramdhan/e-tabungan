@@ -12,32 +12,34 @@
                     <form action="{{ route('users.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name" autofocus required>
+                            <label for="name" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="name" name="name" autofocus required placeholder="Masukkan nama ...">
                         </div>
                         <div class="mb-3">
-                            <label for="id_role" class="form-label">ID Role</label>
+                            <label for="id_role" class="form-label">Role</label>
                             <select class="form-select" id="id_role" name="id_role" required>
-                                <option value="" active>Select one</option>
+                                <option selected disabled>Pilih Role Akun</option>
                                 <option value="1">Admin</option>
-                                <option value="2">Siswa</option>
-                                <option value="3">Guru</option>
+                                <option value="2">Supervisor</option>
+                                <option value="3">Siswa</option>
 
                             </select>
                         </div>
                         <div class="mb-3" id="emailAndPassword">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email_input" name="email_input" autocomplete="off" placeholder="Masukkan email...">
 
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password">
+                            <input type="password" class="form-control" id="password_input" name="password_input" autocomplete="off" placeholder="Masukkan password...">
                         </div>
 
 
 
                         <div class="mb-3">
-                            <label for="id_cl" class="form-label">ID Class Level</label>
+                            <label for="id_cl" class="form-label">Satuan Pendidikan</label>
                             <select class="form-select" id="id_cl" name="id_cl" required>
+                                <option selected disabled>Pilih Satuan Pendidikan</option>
+
                                 @foreach($classLevels as $classLevel)
                                 <option value="{{ $classLevel->cl_id }}">{{ $classLevel->cl_name }}</option>
                                 @endforeach
@@ -45,12 +47,24 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="acc_class" class="form-label">Account Class</label>
-                            <input type="text" class="form-control" id="acc_class" name="acc_class" required>
+                            <label for="acc_class" class="form-label">Kelas</label>
+                            <select class="form-select" id="acc_class" name="acc_class">
+
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="acc_gender" class="form-label">Gender</label>
                             <select class="form-select" id="acc_gender" name="acc_gender" required>
+                                <option selected disabled>Pilih Jenis Kelamin</option>
+
                                 <option value="Laki - Laki">Laki - Laki</option>
                                 <option value="Perempuan">Perempuan</option>
                             </select>

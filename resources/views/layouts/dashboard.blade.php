@@ -19,13 +19,15 @@
 
     <!-- FAVICONS ICON -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}" />
+
     <link href="{{ asset('vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet" />
     <link href="{{ asset('vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('vendor/nouislider/nouislider.min.css') }}" />
-
+    <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}" />
     <!-- Datatable -->
     <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <!-- Style css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
@@ -81,7 +83,7 @@
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
-                            <div class="dashboard_bar">Dashboard</div>
+                            <div class="dashboard_bar">E-Tabungan Pend. Integral Hidayatullah</div>
                         </div>
                         <ul class="navbar-nav header-right">
                             <li class="nav-item dropdown header-profile">
@@ -163,10 +165,10 @@
                         </a>
                         <ul aria-expanded="false">
                             <li>
-                                <a href="#">Data Transaksi</a>
+                                <a href="{{ route('transactions.index') }}">Histori Transaksi</a>
                             </li>
                             <li>
-                                <a href="#">Tambah Transaksi</a>
+                                <a href="{{ route('transactions.create') }}">Tambah Transaksi</a>
                             </li>
                         </ul>
                     </li>
@@ -222,7 +224,9 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    @yield('script')
     <!-- Required vendors -->
+
     <script src="{{ asset('vendor/global/global.min.js') }}"></script>
     <script src="{{ asset('vendor/chart.js/Chart.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
@@ -249,6 +253,46 @@
     <script src="{{ asset('js/dlabnav-init.js') }}"></script>
     <script src="{{ asset('js/demo.js') }}"></script>
     <script src="{{ asset('js/styleSwitcher.js') }}"></script>
+    <script src="{{ asset('js/etab-custom.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Get the elements for email and password fields
+            var emailAndPassword = $('#emailAndPassword');
+            var emailInput = $('#email');
+            var passwordInput = $('#password');
+
+            // Get the element for the id_role field
+            var idRoleInput = $('#id_role');
+
+            // Function to show or hide email and password fields based on selected id_role
+            function toggleEmailAndPassword() {
+                var selectedRoleId = parseInt(idRoleInput.val());
+
+                // If id_role is 2 (Siswa), hide email and password fields, otherwise, show them
+                if (selectedRoleId == 1) {
+
+                    emailAndPassword.show();
+                    emailInput.prop('required', true);
+                    passwordInput.prop('required', true);
+
+                } else if (selectedRoleId == 2) {
+                    emailAndPassword.show();
+                    emailInput.prop('required', true);
+                    passwordInput.prop('required', true);
+                } else {
+                    emailAndPassword.hide();
+                }
+            }
+
+            // Call the function when the page loads
+            toggleEmailAndPassword();
+
+            // Call the function whenever the id_role input value changes
+            idRoleInput.change(toggleEmailAndPassword);
+        });
+    </script>
+
     <script>
         function cardsCenter() {
             /*  testimonial one function by = owl.carousel.js */

@@ -29,7 +29,7 @@
                                             <a href="{{ route('class-levels.edit', ['id' => $classLevel->cl_id]) }}" class="btn btn-primary shadow sharp me-1" style="padding-left: 10px; padding-right: 10px;">
                                                 <i class="fas fa-pencil-alt"></i> &nbsp;Edit
                                             </a>
-                                            <form action="{{ route('class-levels.destroy', ['id' => $classLevel->cl_id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this class level?')">
+                                            <form action="{{ route('class-levels.destroy', ['id' => $classLevel->cl_id]) }}" method="POST" onsubmit="return confirm('Menghapus data ini juga akan mengosongi data satuan pendidikan pada data akun yang bersangkutan. Apakah anda yakin ? ')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger shadow sharp" style="padding-left: 10px; padding-right: 10px;">

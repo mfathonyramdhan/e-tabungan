@@ -87,4 +87,35 @@ class ClassLevelController extends Controller
         // Redirect back to the class levels index page with a success message
         return redirect()->route('class-levels')->with('success', 'Class level deleted successfully.');
     }
+
+    public function getClassData($id_cl)
+    {
+        // Fetch the class data based on the selected id_cl
+        $classData = [];
+
+        if ($id_cl == 1) {
+            $classData = [
+                ['value' => 'A', 'text' => 'A'],
+                ['value' => 'B', 'text' => 'B'],
+            ];
+        } elseif ($id_cl == 2) {
+            $classData = [
+                ['value' => '1', 'text' => '1'],
+                ['value' => '2', 'text' => '2'],
+                ['value' => '3', 'text' => '3'],
+                ['value' => '4', 'text' => '4'],
+                ['value' => '5', 'text' => '5'],
+                ['value' => '6', 'text' => '6'],
+            ];
+        } elseif ($id_cl == 3) {
+            $classData = [
+                ['value' => '1', 'text' => '1'],
+                ['value' => '2', 'text' => '2'],
+                ['value' => '3', 'text' => '3'],
+            ];
+        }
+
+        // Return the class data as a JSON response
+        return response()->json($classData);
+    }
 }
