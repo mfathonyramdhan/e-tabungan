@@ -123,14 +123,14 @@
 
                     <li>
                         <a href="{{ route('dashboard') }}" class="" aria-expanded="false">
-                            <i class="fas fa-circle"></i>
+                            <i class="fas fa-tachometer-alt"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-circle"></i>
+                            <i class="fas fa-building"></i>
                             <span class="nav-text">Sat. Pendidikan</span>
                         </a>
                         <ul aria-expanded="false">
@@ -145,7 +145,7 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-circle"></i>
+                            <i class="fas fa-users"></i>
                             <span class="nav-text">Akun</span>
                         </a>
                         <ul aria-expanded="false">
@@ -160,7 +160,7 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="fas fa-circle"></i>
+                            <i class="fas fa-money-check"></i>
                             <span class="nav-text">Transaksi</span>
                         </a>
                         <ul aria-expanded="false">

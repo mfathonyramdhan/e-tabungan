@@ -23,9 +23,26 @@ class DashboardController extends Controller
             ->where('id_role', 3)
             ->count();
 
+        $totalAdminSupervisor = DB::table('users')
+            ->where('id_role', '!=', 3)
+            ->count();
+
+
+
         $formattedTotalSaldoTabungan = 'Rp ' . number_format($totalSaldoTabungan, 0, ',', '.');
 
+        $totalTabungan = DB::table('transactions')
+            ->sum('tr_debt');
 
-        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa'));
+        $formattedTotalTabungan = 'Rp ' . number_format($totalTabungan, 0, ',', '.');
+
+
+        $totalPenarikan = DB::table('transactions')
+            ->sum('tr_credit');
+
+        $formattedTotalPenarikan = 'Rp ' . number_format($totalPenarikan, 0, ',', '.');
+
+
+        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor'));
     }
 }

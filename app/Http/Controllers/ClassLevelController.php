@@ -11,9 +11,10 @@ class ClassLevelController extends Controller
 {
     public function index()
     {
-        $classLevels = ClassLevel::all();
+        $classLevels = ClassLevel::orderBy('cl_name')->get();
         return view('class_levels.index', compact('classLevels'));
     }
+
 
     public function edit($id)
     {
