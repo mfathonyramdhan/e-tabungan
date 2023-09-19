@@ -254,6 +254,17 @@
     <script src="{{ asset('js/demo.js') }}"></script>
     <script src="{{ asset('js/styleSwitcher.js') }}"></script>
     <script src="{{ asset('js/etab-custom.js') }}"></script>
+    <!-- Required vendors -->
+    <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/chart.js/Chart.bundle.min.js"></script>
+	<!-- Apex Chart -->
+	<script src="vendor/apexchart/apexchart.js"></script>
+    
+	<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <!-- Chart ChartJS plugin files -->
+    <script src="vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="js/plugins-init/chartjs-init.js"></script>
 
     <script>
         $(document).ready(function() {
