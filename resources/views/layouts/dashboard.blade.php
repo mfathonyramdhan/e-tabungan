@@ -265,6 +265,8 @@
     <!-- Chart ChartJS plugin files -->
     <script src="vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="js/plugins-init/chartjs-init.js"></script>
+     <!-- Daterangepicker -->
+    <script src="js/plugins-init/bs-daterange-picker-init.js"></script>
 
     <script>
         $(document).ready(function() {
