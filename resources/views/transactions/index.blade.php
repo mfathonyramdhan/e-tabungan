@@ -23,27 +23,14 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal">
                                         </button>
                                     </div>
-                                    <div class="modal-body">Modal body text goes here.</div>
-                                    <div class="row">
-                                        <div class="col-xl-4 mb-3">
-                                            <div class="example">
-                                                <p class="mb-1">Date Range Pick</p>
-                                                <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4 mb-3">
-                                            <div class="example">
-                                                <p class="mb-1">Date Range With Time</p>
-                                                <input type="text" class="form-control input-daterange-timepicker" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-4">
-                                            <div class="example">
-                                                <p class="mb-1">Limit Selectable Dates</p>
-                                                <input class="form-control input-limit-datepicker" type="text" name="daterange" value="06/01/2015 - 06/07/2015">
-                                            </div>
+                                    <div class="modal-body">
+                                        <div class="example">
+                                            <p class="mb-1">Date Range Pick</p>
+                                            <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2015 - 01/31/2015">
                                         </div>
                                     </div>
+                                    
+                                
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary">Save changes</button>
