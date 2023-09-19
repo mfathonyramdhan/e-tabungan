@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use App\Models\Transaction;
 use App\Models\ClassLevel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    
     public function index()
     {
         $user = Auth::user(); // Get the authenticated user
@@ -26,8 +28,12 @@ class DashboardController extends Controller
         $totalAdminSupervisor = DB::table('users')
             ->where('id_role', '!=', 3)
             ->count();
-
-
+        
+        $MaxMonth = Transaction::orderBy('datecreated', 'DESC')->first();
+        $myDate =  $MaxMonth->datecreated;
+        $MaxDate = strtotime($myDate);
+        $month = date('m', $MaxDate);
+        // dd($month); 
 
         $formattedTotalSaldoTabungan = 'Rp ' . number_format($totalSaldoTabungan, 0, ',', '.');
 

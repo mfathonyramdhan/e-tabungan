@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model
 {
+    protected $guarded = 'tr_id';
     protected $primaryKey = 'tr_id';
     public $timestamps = false;
 

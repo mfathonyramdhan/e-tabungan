@@ -29,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
     Route::get('/transactions/{transaction}/print', [TransactionController::class, 'printTransaction'])->name('transactions.printTransaction');
+    Route::post('transaction/printSelection', [TransactionController::class, 'printSelection'])->name('transactions.printSelectionTransaction');
 
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::put('class-levels/{id}', 'App\Http\Controllers\ClassLevelController@update')->name('class-levels.update');
     Route::get('class-levels/create', 'App\Http\Controllers\ClassLevelController@create')->name('class-levels.create');
     Route::post('class-levels', 'App\Http\Controllers\ClassLevelController@store')->name('class-levels.store');
+    
     Route::delete('class-levels/{id}', 'App\Http\Controllers\ClassLevelController@destroy')->name('class-levels.destroy');
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
