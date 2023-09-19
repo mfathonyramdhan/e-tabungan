@@ -12,7 +12,7 @@
                     <h4 class="card-title">Histori Transaksi</h4>
                     <div class="bootstrap-modal">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#basicModal"> <i class="fa fa-print"></i>Basic modal</button>
+                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#basicModal"> <i class="fa fa-print"></i> Print berdasarkan tanggal</button>
                         <!-- Modal -->
                         <div class="modal fade" id="basicModal">
                             <div class="modal-dialog" role="document">
