@@ -25,7 +25,19 @@
     <link rel="stylesheet" href="{{ asset('vendor/nouislider/nouislider.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist.min.css') }}" />
     <!-- Datatable -->
-    <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables/css/jquery.dataTables.min.css') }}') }}" rel="stylesheet">
+    <!-- Daterange picker -->
+    <link href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
+    <!-- Clockpicker -->
+    <link href="{{ asset('vendor/clockpicker/css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">
+    <!-- asColorpicker -->
+    <link href="{{ asset('vendor/jquery-asColorPicker/css/asColorPicker.min.css') }}" rel="stylesheet">
+    <!-- Material color picker -->
+    <link href="{{ asset('vendor/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet">
+	
+    <!-- Pick date -->
+    <link rel="stylesheet" href="{{ asset('vendor/pickadate/themes/default.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/pickadate/themes/default.date.css') }}">
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -255,19 +267,57 @@
     <script src="{{ asset('js/styleSwitcher.js') }}"></script>
     <script src="{{ asset('js/etab-custom.js') }}"></script>
     <!-- Required vendors -->
-    <script src="vendor/global/global.min.js"></script>
-    <script src="vendor/chart.js/Chart.bundle.min.js"></script>
+    <script src="{{ asset('vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('vendor/chart.js/Chart.bundle.min.js') }}"></script>
 	<!-- Apex Chart -->
-	<script src="vendor/apexchart/apexchart.js"></script>
+	<script src="{{ asset('vendor/apexchart/apexchart.js') }}"></script>
     
-	<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	<script src="{{ asset('vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+    
+    <!-- clockpicker -->
+    <script src="{{ asset('vendor/clockpicker/js/bootstrap-clockpicker.min.js') }}"></script>
+    <!-- asColorPicker -->
+    <script src="{{ asset('vendor/jquery-asColor/jquery-asColor.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-asGradient/jquery-asGradient.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js') }}"></script>
+    <!-- Material color picker -->
+    <script src="{{ asset('vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+    <!-- pickdate -->
+    <script src="{{ asset('vendor/pickadate/picker.js') }}"></script>
+    <script src="{{ asset('vendor/pickadate/picker.time.js') }}"></script>
+    <script src="{{ asset('vendor/pickadate/picker.date.js') }}"></script>
 
+<<<<<<< HEAD
     <!-- Chart ChartJS plugin files -->
     <script src="vendor/chart.js/Chart.bundle.min.js"></script>
     <script src="js/plugins-init/chartjs-init.js"></script>
      <!-- Daterangepicker -->
     <script src="js/plugins-init/bs-daterange-picker-init.js"></script>
+=======
+>>>>>>> fcc527054cd0219368d0579953d3300b36f80477
 
+
+    <!-- Daterangepicker -->
+    <!-- momment js is must -->
+    <script src="{{ asset('vendor/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- Daterangepicker -->
+    <script src="{{ asset('js/plugins-init/bs-daterange-picker-init.js') }}"></script>
+    <!-- Clockpicker init -->
+    <script src="{{ asset('js/plugins-init/clock-picker-init.js') }}"></script>
+    <!-- asColorPicker init -->
+    <script src="{{ asset('js/plugins-init/jquery-asColorPicker.init.js') }}"></script>
+    <!-- Material color picker init -->
+    <script src="{{ asset('js/plugins-init/material-date-picker-init.js') }}"></script>
+    <!-- Pickdate -->
+    <script src="{{ asset('js/plugins-init/pickadate-init.js') }}"></script>
+
+	<script src="{{ asset('vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
+
+    <script src="{{ asset('js/custom.min.js') }}"></script>
+	<script src="{{ asset('js/dlabnav-init.js') }}"></script>
+	<script src="{{ asset('js/demo.js') }}"></script>
+    <script src="{{ asset('js/styleSwitcher.js') }}"></script>
     <script>
         $(document).ready(function() {
             // Get the elements for email and password fields
