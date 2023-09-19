@@ -74,9 +74,7 @@
         </div>
 
         <div class="row">
-
-
-            <div class="col">
+            <div class="col-12">
                 <div class="widget-stat card">
                     <div class="card-body p-4">
                         <div class="media ai-icon">
@@ -121,20 +119,28 @@
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-12 col-sm-12">
+                    <div class="col-lg-8">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Basic Bar Chart</h4>
+                                <h4 class="card-title">Grafik Bulanan</h4>
                             </div>
                             <div class="card-body">
                                 <canvas id="barChart_1"></canvas>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Title</h5>
+                                <p class="card-text">Content</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="row">
+        <div class="row">
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-header">
@@ -214,7 +220,7 @@
                 </div>
             </div>
 
-        </div> -->
+        </div>
 
 
     </div>
