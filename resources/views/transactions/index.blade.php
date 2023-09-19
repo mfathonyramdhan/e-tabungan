@@ -3,6 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="d-flex justify-content-end mb-3">
+
     </div>
     <div class="row">
         <div class="col-12">
@@ -39,6 +40,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>ID Trans.</th>
+
                                     <th>Nama</th>
                                     <th>Satdik & Kelas</th>
                                     <th>Tabungan</th>
