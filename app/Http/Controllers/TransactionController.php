@@ -69,15 +69,8 @@ class TransactionController extends Controller
         ->orderBy('datecreated', 'asc') // Order by datecreated in ascending order
         ->get()
         ->groupBy('id_acc');
-        // dd($transactions);
-        // foreach ($transactions as $row){
-        //     echo "cetak tanggal  :". $row->acc_name;
-        //     echo "<br>";
-        // }
         return view('transactions.printSelection', compact('transactions'));
     }
-
-
     public function destroy(Transaction $transaction)
     {
         // Perform the deletion
@@ -86,9 +79,6 @@ class TransactionController extends Controller
         // Redirect back to the index page with a success message
         return redirect()->route('transactions.index')->with('success', 'Transaction deleted successfully.');
     }
-
-
-
     public function create()
     {
         // Assuming you need to fetch some data from other models for the form, you can do it here.
