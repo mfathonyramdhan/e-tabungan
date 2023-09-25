@@ -416,7 +416,7 @@
     data: {
       labels: dataYAxis,
       datasets: [{
-        label: '# of Votes',
+        label: '# Jumlah ',
         data: data1,
         borderColor: 'rgba(136,108,192, 1)',
         borderWidth: "0",
