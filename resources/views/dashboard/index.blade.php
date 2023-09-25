@@ -125,7 +125,8 @@
                                 <h4 class="card-title">Grafik Bulanan</h4>
                             </div>
                             <div class="card-body">
-                                <canvas id="barChart_1"></canvas>
+                                
+                                <canvas id="myChart"></canvas>
                             </div>
                         </div>
                     </div>
