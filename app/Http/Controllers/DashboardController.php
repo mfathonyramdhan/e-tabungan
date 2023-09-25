@@ -30,49 +30,33 @@ class DashboardController extends Controller
         $totalAdminSupervisor = DB::table('users')
             ->where('id_role', '!=', 3)
             ->count();
-        // declarated array
-       
-        // get current month
+        // cahrt Bar logic
         $currentMonth = Transaction::orderBy('datecreated', 'DESC')->first();
-        // $myDate =  $currentMonth->datecreated;
-     
         $myDate = Carbon::parse($currentMonth->datrcrated);
         $endDate = strtotime($myDate);
         $month = date('m', $endDate);
         $minDate = Carbon::parse($myDate)->subMonths(5)->toDateString();
-        // echo $minDate;
-        $endDate = strtotime($minDate);
-        $minMonth = date('m', $endDate);
-        // for ($i=$minMonth; $i <= $month ; $i++) { 
-        //        $starDate = new date("Y-m-01",time());
-        //        $endDate = new date("Y-m-t",time());
-        //     echo  "tanggal Awal :". $starDate;
-        //     echo  "</br>";
-        //     echo  "tanggal Awal :". $endDate;
-        //     echo  "</br>";
-        // }
-        // dd($minDate);
-        $year=date('Y', $endDate);
-        // echo $year;
-        $date=Carbon::now();
-       $s=0;
-       
-        for($i=$minMonth; $i<=$month; $i++){
+        $date1 = new Carbon($minDate);
+        $date2 = new Carbon($myDate);
+        $starDate1 = date($date1->startOfMonth());
+        $endDate1 = date($date2->endOfMonth());
+        $dataBar1 = Transaction::select(DB::raw("SUM(tr_debt) AS debt"))
+        ->whereBetween('datecreated', [$starDate1 , $endDate1 ])
+        ->groupBy(DB::raw("MONTH(datecreated)"))
+        ->get();
+        $resultArray = $dataBar1->toArray();
+        $dataBr = Arr::flatten($resultArray);
+        for ($i=0; $i <=5 ; $i++) { 
+            $newDateTime = Carbon::parse($starDate1)->addMonth($i)->toDateString();
+            $str = strtotime($newDateTime);
             
-            $date= new Carbon($year.'-'.$minMonth.'-01');
-            $starDate1 = date($date->startOfMonth());
-            $endDate1 = date($date->endOfMonth());
-            $data = Transaction::select('tr_debt')
-            ->whereBetween('datecreated', [$starDate1 , $endDate1  ])
-            ->get()->sum('tr_debt');
-            // echo $data;
-            // echo"<br>";
-            // echo"<br>";
-            $array = [$s => $data];
-            $minMonth = $minMonth + 1;
-            $s = $s + 1;
+            $dataBulan[$i] = date('M', $str);
+            
         }
-        // dd($array);
+        $dataYAxis = Arr::flatten($dataBulan);
+        // end chart bar
+        // dd($dataYAxis);
+        
         
 
         $formattedTotalSaldoTabungan = 'Rp ' . number_format($totalSaldoTabungan, 0, ',', '.');
@@ -89,6 +73,6 @@ class DashboardController extends Controller
         $formattedTotalPenarikan = 'Rp ' . number_format($totalPenarikan, 0, ',', '.');
 
 
-        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor'));
+        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor','dataBr','dataYAxis'));
     }
 }

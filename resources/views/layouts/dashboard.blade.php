@@ -400,8 +400,45 @@
                 cardsCenter();
             }, 1000);
         });
-    </script>
 
+    </script>
+    <script>
+    var data33 = @json($dataBr);
+    var labels = @json($dataYAxis);
+
+    var data1 = Object.values(data33);
+    var dataYAxis = Object.values(labels);
+    console.log(dataYAxis);
+    const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: dataYAxis,
+      datasets: [{
+        label: '# of Votes',
+        data: data1,
+        borderColor: 'rgba(136,108,192, 1)',
+        borderWidth: "0",
+        backgroundColor: 'rgba(136,108,192, 0.7)'
+      }]
+    },
+    options: {
+        legend: false, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                // Change here
+                barPercentage: 1
+            }]
+        }
+    }
+  });
+</script>
 
 </body>
 

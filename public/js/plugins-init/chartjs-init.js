@@ -5,6 +5,46 @@
 	/* function draw() {
 		
 	} */
+	
+
+	var barChart12 = {
+		// if(jQuery('#barChart_1').length > 0 ){
+		// 	const barChart_1 = document.getElementById("barChart_1").getContext('2d');
+		chartData:function(ctx, type, labels, data){
+			barChart_1.height = 100;
+
+			new Chart(barChart_1, {
+				type: type,
+				data: {
+					defaultFontFamily: 'Poppins',
+					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+					datasets: [
+						{
+							label: "My First dataset",
+							data: data,
+							borderColor: 'rgba(136,108,192, 1)',
+							borderWidth: "0",
+							backgroundColor: 'rgba(136,108,192, 1)'
+						}
+					]
+				},
+				options: {
+					legend: false, 
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}],
+						xAxes: [{
+							// Change here
+							barPercentage: 0.5
+						}]
+					}
+				}
+			});
+		}
+	}
 
  var dlabSparkLine = function(){
 	let draw = Chart.controllers.line.__super__.draw; //draw shadow
