@@ -68,11 +68,13 @@ class DashboardController extends Controller
             // echo $data;
             // echo"<br>";
             // echo"<br>";
-            $array = [$s => $data];
+            $array = array(
+                $s => $data
+            );
             $minMonth = $minMonth + 1;
             $s = $s + 1;
         }
-        // dd($array);
+        var_dump($array);
         
 
         $formattedTotalSaldoTabungan = 'Rp ' . number_format($totalSaldoTabungan, 0, ',', '.');
@@ -89,6 +91,6 @@ class DashboardController extends Controller
         $formattedTotalPenarikan = 'Rp ' . number_format($totalPenarikan, 0, ',', '.');
 
 
-        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor'));
+        // return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor'));
     }
 }
