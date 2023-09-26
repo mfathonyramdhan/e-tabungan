@@ -403,12 +403,11 @@
 
     </script>
     <script>
-    var data33 = @json($dataBr);
-    var labels = @json($dataYAxis);
+    
 
     var data1 = Object.values(data33);
     var dataYAxis = Object.values(labels);
-    console.log(dataYAxis);
+    // console.log(dataYAxis);
     const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
@@ -420,7 +419,43 @@
         data: data1,
         borderColor: 'rgba(136,108,192, 1)',
         borderWidth: "0",
-        backgroundColor: 'rgba(136,108,192, 0.7)'
+        backgroundColor: ['#D2E0FB','#B0D9B1','#EDB7ED','#F2D8D8','#CDC2AE','#FFE9AE']
+      }]
+    },
+    options: {
+        legend: false, 
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                // Change here
+                barPercentage: 1
+            }]
+        }
+    }
+  });
+</script>
+<script>
+    
+
+    var xAxis2 = Object.values(xAxis);
+    var yAxis2 = Object.values(yAxis);
+    // console.log(yAxis2);
+    const ctx = document.getElementById('myChart2');
+
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: xAxis2,
+      datasets: [{
+        label: '# Jumlah ',
+        data: YAxis2,
+        borderColor: 'rgba(136,108,192, 1)',
+        borderWidth: "0",
+        backgroundColor: ['#D2E0FB','#B0D9B1','#EDB7ED','#F2D8D8','#CDC2AE','#FFE9AE']
       }]
     },
     options: {

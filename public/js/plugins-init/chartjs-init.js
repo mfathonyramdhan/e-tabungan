@@ -7,44 +7,38 @@
 	} */
 	
 
-	var barChart12 = {
-		// if(jQuery('#barChart_1').length > 0 ){
-		// 	const barChart_1 = document.getElementById("barChart_1").getContext('2d');
-		chartData:function(ctx, type, labels, data){
-			barChart_1.height = 100;
+	var xAxis2 = Object.values(data33);
+    var yAxis2 = Object.values(labels);
+    // console.log(yAxis2);
+    const ctx = document.getElementById('myChart2');
 
-			new Chart(barChart_1, {
-				type: type,
-				data: {
-					defaultFontFamily: 'Poppins',
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-					datasets: [
-						{
-							label: "My First dataset",
-							data: data,
-							borderColor: 'rgba(136,108,192, 1)',
-							borderWidth: "0",
-							backgroundColor: 'rgba(136,108,192, 1)'
-						}
-					]
-				},
-				options: {
-					legend: false, 
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: true
-							}
-						}],
-						xAxes: [{
-							// Change here
-							barPercentage: 0.5
-						}]
+	new Chart(ctx, {
+		type: 'line',
+		data: {
+		labels: yAxis2,
+		datasets: [{
+			label: '# Jumlah ',
+			data: xAxis2,
+			borderColor: 'rgba(136,108,192, 1)',
+			borderWidth: "0",
+			backgroundColor: ['#D2E0FB','#B0D9B1','#EDB7ED','#F2D8D8','#CDC2AE','#FFE9AE']
+		}]
+		},
+		options: {
+			legend: false, 
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
 					}
-				}
-			});
+				}],
+				xAxes: [{
+					// Change here
+					barPercentage: 1
+				}]
+			}
 		}
-	}
+	});
 
  var dlabSparkLine = function(){
 	let draw = Chart.controllers.line.__super__.draw; //draw shadow
@@ -244,9 +238,9 @@
 					nk.stroke = function () {
 						nk.save();
 						nk.shadowColor = 'rgba(255, 0, 0, .2)';
-						nk.shadowBlur = 10;
+						nk.shadowBlur = 1;
 						nk.shadowOffsetX = 0;
-						nk.shadowOffsetY = 10;
+						nk.shadowOffsetY = 1;
 						_stroke.apply(this, arguments)
 						nk.restore();
 					}
@@ -267,7 +261,10 @@
 							borderColor: 'rgba(136,108,192, 1)',
 							borderWidth: "2",
 							backgroundColor: 'transparent',  
-							pointBackgroundColor: 'rgba(136,108,192, 1)'
+							pointBackgroundColor: 'rgba(136,108,192, 0.5)',
+							pointStyle: 'circle',
+							pointRadius: 10,
+							pointHoverRadius: 15
 						}
 					]
 				},

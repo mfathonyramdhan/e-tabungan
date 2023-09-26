@@ -32,7 +32,7 @@ class DashboardController extends Controller
             ->count();
         // cahrt Bar logic
         $currentMonth = Transaction::orderBy('datecreated', 'DESC')->first();
-        $myDate = Carbon::parse($currentMonth->datrcrated);
+        $myDate = Carbon::parse($currentMonth->datecreated);
         $endDate = strtotime($myDate);
         $month = date('m', $endDate);
         $minDate = Carbon::parse($myDate)->subMonths(5)->toDateString();
@@ -46,17 +46,46 @@ class DashboardController extends Controller
         ->get();
         $resultArray = $dataBar1->toArray();
         $dataBr = Arr::flatten($resultArray);
-        for ($i=0; $i <=5 ; $i++) { 
-            $newDateTime = Carbon::parse($starDate1)->addMonth($i)->toDateString();
-            $str = strtotime($newDateTime);
+        $newDateTime = Transaction::select("datecreated")
+            ->whereBetween('datecreated', [$starDate1 , $endDate1 ])
+            ->groupBy(DB::raw("MONTH(datecreated)"))
+            ->get();
             
-            $dataBulan[$i] = date('M', $str);
+            $resultArray2 = $newDateTime->toArray();
+            $str = Arr::flatten($resultArray2);
+        $count = $newDateTime->count();
+        for ($i=0; $i <$count ; $i++) { 
+
+            $dataYAxis[$i] = Carbon::parse($str[$i])->translatedFormat('F');
             
         }
-        $dataYAxis = Arr::flatten($dataBulan);
+        // $dataYAxis = Arr::flatten($dataBulan);
+        // end chart bar
+        // dd($dataBulan);
+        $currentWeek = Transaction::orderBy('datecreated', 'DESC')->first();
+        $myWeek = Carbon::parse($currentWeek->datecreated);
+        $endWeek = strtotime($myWeek);
+        $startDay1 = date($myWeek->startOfWeek());
+        $endDay1 = date($myWeek->endOfWeek());
+        $dataChartLine = Transaction::select("tr_debt AS debt", "datecreated")
+        ->whereBetween('datecreated', ["2023-09-18 18:53:11", "2023-09-24 18:53:11" ])
+        ->groupBy(DB::raw("DAY(datecreated)"))
+        ->get();
+        $resultArray2 = $dataChartLine->toArray();
+        $yAxis = Arr::flatten($resultArray2);
+        // dd($yAxis);
+        for ($i=0; $i <=5 ; $i++) { 
+            $newDateTime = Carbon::parse($startDay1)->addDays($i)->toDateString();
+            $str = strtotime($newDateTime);
+            
+            $dayArray[$i] = Carbon::parse($str)->translatedFormat('l');
+            
+        }
+        $xAxis = Arr::flatten($dayArray);
         // end chart bar
         // dd($dataYAxis);
-        
+
+
         
 
         $formattedTotalSaldoTabungan = 'Rp ' . number_format($totalSaldoTabungan, 0, ',', '.');
@@ -73,6 +102,8 @@ class DashboardController extends Controller
         $formattedTotalPenarikan = 'Rp ' . number_format($totalPenarikan, 0, ',', '.');
 
 
-        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor','dataBr','dataYAxis'));
+        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor','dataBr','dataYAxis', 'xAxis', 'yAxis'));
     }
+
+    
 }
