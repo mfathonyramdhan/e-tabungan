@@ -85,9 +85,6 @@ class DashboardController extends Controller
         // end chart bar
         // dd($dataYAxis);
 
-
-        
-
         $formattedTotalSaldoTabungan = 'Rp ' . number_format($totalSaldoTabungan, 0, ',', '.');
 
         $totalTabungan = DB::table('transactions')
