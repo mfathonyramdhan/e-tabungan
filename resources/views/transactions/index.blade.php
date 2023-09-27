@@ -10,12 +10,40 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Histori Transaksi</h4>
-                    <a href="{{ route('transactions.print') }}" class="btn btn-primary" target="_blank">
-                        <i class="fa fa-print"></i> Print Semua HIstori Transaksi
-                    </a>
+                    <div class="bootstrap-modal">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#basicModal"> <i class="fa fa-print"></i> Print berdasarkan tanggal</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="basicModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                <form class="form" method="POST" action="{{ route('transactions.printSelectionTransaction') }}">
+                                @csrf
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                            <div class="example">
+                                                <p class="mb-1">Date Range Pick</p>
+                                                <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2023 - 01/31/2023">
+                                            </div>
+                                        
+                                    </div>
+                                    
+                                
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="example3" class="display" style="min-width: 845px">
@@ -92,6 +120,11 @@
                             </tfoot>
                         </table>
                     </div>
+                </div>
+                <div class="card-footer border-0 pt-0">
+                    <a href="{{ route('transactions.print') }}" class="btn btn-primary" target="_blank">
+                        <i class="fa fa-print"></i> Print Semua HIstori Transaksi
+                    </a>
                 </div>
             </div>
         </div>

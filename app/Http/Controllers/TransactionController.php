@@ -45,8 +45,32 @@ class TransactionController extends Controller
 
         return view('transactions.print', compact('transactions'));
     }
+    public function printSelection(Request $request)
+    {
+        // Retrieve all transactions from the database and group them by account
+        // $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
+        //     ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+        //     ->select('transactions.*', 'users.name as acc_name', 'users.acc_class', 'class_levels.cl_name')
+        //     ->orderBy('datecreated', 'asc') // Order by datecreated in ascending order
+        //     ->get()
+        //     ->groupBy('id_acc'); // Group transactions by id_acc (account ID)
 
-
+        
+        $daterange = $request->input('daterange');
+        $dates = explode(' - ' ,$daterange);
+        $minDate = strtotime($dates[0]);
+        $MaxDate = strtotime($dates[1]);
+        $awalCetak = date('Y-m-d', $minDate);
+        $akhirCetak = date('Y-m-d', $MaxDate);
+        $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
+        ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+        ->select('transactions.*', 'users.name AS acc_name', 'users.acc_class', 'class_levels.cl_name')
+        ->whereBetween('datecreated', [$awalCetak, $akhirCetak])
+        ->orderBy('datecreated', 'asc') // Order by datecreated in ascending order
+        ->get()
+        ->groupBy('id_acc');
+        return view('transactions.printSelection', compact('transactions'));
+    }
     public function destroy(Transaction $transaction)
     {
         // Perform the deletion
@@ -55,9 +79,6 @@ class TransactionController extends Controller
         // Redirect back to the index page with a success message
         return redirect()->route('transactions.index')->with('success', 'Transaction deleted successfully.');
     }
-
-
-
     public function create()
     {
         // Assuming you need to fetch some data from other models for the form, you can do it here.
