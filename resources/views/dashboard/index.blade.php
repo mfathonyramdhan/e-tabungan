@@ -125,7 +125,7 @@
                                 <h4 class="card-title">Grafik Bulanan</h4>
                             </div>
                             <div class="card-body">
-                                
+
                                 <canvas id="myChart"></canvas>
                             </div>
                         </div>
@@ -133,15 +133,16 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Title</h5>
-                                <p class="card-text">Content</p>
+                                <h5 class="card-title">Grafik Bulanan</h5>
+                                <p class="card-text">Diagram Lingkaran</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!-- @BEGINOF GRAFIK TOTAL TRANSAKSI DALAM 1 MINGGU TERAKHIR -->
+        <!-- <div class="row">
             <div class="col-12">
                 <div class="row">
                     <div class="col-lg-8">
@@ -165,14 +166,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-       
+        </div> -->
+        <!-- @ENDOF GRAFIK TOTAL TRANSAKSI DALAM 1 MINGGU TERAKHIR -->
 
 
     </div>
 </div>
 <script>
-     var data33 = @json($dataBr);
+    var data33 = @json($dataBr);
     var labels = @json($dataYAxis);
     var xAxis = @json($xAxis);
     var yAxis = @json($yAxis);

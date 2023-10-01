@@ -34,6 +34,8 @@ class CreateTables extends Migration
             $table->string('acc_class')->nullable();
             $table->unsignedBigInteger('id_role')->nullable();
             $table->unsignedBigInteger('id_cl')->nullable();
+            $table->integer('nis')->nullable();
+
 
             $table->foreign('id_role')->references('role_id')->on('roles');
             $table->foreign('id_cl')->references('cl_id')->on('class_levels');
@@ -43,10 +45,8 @@ class CreateTables extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id('tr_id');
             $table->unsignedBigInteger('id_acc');
-            $table->integer('tr_debt');
-            $table->integer('tr_credit');
-            $table->timestamp('datecreated')->useCurrent();
-            $table->timestamp('datemodified')->nullable();
+            $table->integer('tr_debt')->nullable();
+            $table->integer('tr_credit')->nullable();
             $table->timestamps();
 
             $table->foreign('id_acc')->references('id')->on('users'); // Reference users table
@@ -74,11 +74,11 @@ class CreateTables extends Migration
                 'acc_class',
                 'id_role',
                 'id_cl',
+                'nis',
             ]);
         });
 
-        // Drop the remaining tables
-        Schema::dropIfExists('accounts');
+
         Schema::dropIfExists('class_levels');
         Schema::dropIfExists('roles');
     }

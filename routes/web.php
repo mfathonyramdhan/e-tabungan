@@ -17,18 +17,32 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-    // transaksi
+
+
+    // transaksi 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
 
     Route::get('/transactions/print', [TransactionController::class, 'print'])->name('transactions.print');
 
+    // transaction print by unit
+    Route::get('/transactions/printUnit/{unitName}', [TransactionController::class, 'printUnit'])->name('transactions.printUnit');
+
+    // transaction print by kelas
+    Route::post('/transactions/printKelas', [TransactionController::class, 'storeKelas'])->name('transactions.printKelas');
+
+
     //end transaksi
+
+
+
     Route::get('/api/get-class-data/{id_cl}', [ClassLevelController::class, 'getClassData']);
 
     Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
+
     Route::get('/transactions/{transaction}/print', [TransactionController::class, 'printTransaction'])->name('transactions.printTransaction');
+
     Route::post('transaction/printSelection', [TransactionController::class, 'printSelection'])->name('transactions.printSelectionTransaction');
 
 
@@ -38,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::put('class-levels/{id}', 'App\Http\Controllers\ClassLevelController@update')->name('class-levels.update');
     Route::get('class-levels/create', 'App\Http\Controllers\ClassLevelController@create')->name('class-levels.create');
     Route::post('class-levels', 'App\Http\Controllers\ClassLevelController@store')->name('class-levels.store');
-    
+
     Route::delete('class-levels/{id}', 'App\Http\Controllers\ClassLevelController@destroy')->name('class-levels.destroy');
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     Route::get('users/create', [UsersController::class, 'create'])->name('users.create');

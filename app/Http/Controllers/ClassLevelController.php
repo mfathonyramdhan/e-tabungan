@@ -96,23 +96,45 @@ class ClassLevelController extends Controller
 
         if ($id_cl == 1) {
             $classData = [
-                ['value' => 'A', 'text' => 'A'],
-                ['value' => 'B', 'text' => 'B'],
+                ['value' => 'A1', 'text' => 'A1'],
+                ['value' => 'B1', 'text' => 'B1'],
+                ['value' => 'A2', 'text' => 'A2'],
+                ['value' => 'B2', 'text' => 'B2'],
+                ['value' => 'A3', 'text' => 'A3'],
+                ['value' => 'B3', 'text' => 'B3'],
             ];
         } elseif ($id_cl == 2) {
             $classData = [
-                ['value' => '1', 'text' => '1'],
-                ['value' => '2', 'text' => '2'],
-                ['value' => '3', 'text' => '3'],
-                ['value' => '4', 'text' => '4'],
-                ['value' => '5', 'text' => '5'],
-                ['value' => '6', 'text' => '6'],
+                ['value' => '1A', 'text' => '1A'],
+                ['value' => '1B', 'text' => '1B'],
+                ['value' => '1C', 'text' => '1C'],
+                ['value' => '2A', 'text' => '2A'],
+                ['value' => '2B', 'text' => '2B'],
+                ['value' => '2C', 'text' => '2C'],
+                ['value' => '3A', 'text' => '3A'],
+                ['value' => '3B', 'text' => '3B'],
+                ['value' => '3C', 'text' => '3C'],
+                ['value' => '4A', 'text' => '4A'],
+                ['value' => '4B', 'text' => '4B'],
+                ['value' => '4C', 'text' => '4C'],
+                ['value' => '5A', 'text' => '5A'],
+                ['value' => '5B', 'text' => '5B'],
+                ['value' => '5C', 'text' => '5C'],
+                ['value' => '6A', 'text' => '6A'],
+                ['value' => '6B', 'text' => '6B'],
+                ['value' => '6C', 'text' => '6C'],
             ];
         } elseif ($id_cl == 3) {
             $classData = [
-                ['value' => '1', 'text' => '1'],
-                ['value' => '2', 'text' => '2'],
-                ['value' => '3', 'text' => '3'],
+                ['value' => '7A', 'text' => '7A'],
+                ['value' => '7B', 'text' => '7B'],
+                ['value' => '7C', 'text' => '7C'],
+                ['value' => '8A', 'text' => '8A'],
+                ['value' => '8B', 'text' => '8B'],
+                ['value' => '8C', 'text' => '8C'],
+                ['value' => '9A', 'text' => '9A'],
+                ['value' => '9B', 'text' => '9B'],
+                ['value' => '9C', 'text' => '9C'],
             ];
         }
 

@@ -49,7 +49,7 @@
                                     <tr>
                                         <td>{{ $counter }}</td>
                                         <td>
-                                            {{ $transaction->datecreated ? \Carbon\Carbon::parse($transaction->datecreated)->translatedFormat('l, d F Y, H:i') : '-' }}
+                                            {{ $transaction->created_at ? \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('l, d F Y, H:i') : '-' }}
                                         </td>
                                         <td>{{ $transaction->tr_id }}</td>
                                         <td>

@@ -12,23 +12,24 @@ class SampleDataSeeder extends Seeder
     {
         // Seed roles table with sample Indonesian data
         DB::table('roles')->insert([
-            ['role_name' => 'Admin'],
-            ['role_name' => 'Pengguna'],
-            ['role_name' => 'Moderator'],
+            ['role_name' => 'Admin', 'created_at' => now(),],
+            ['role_name' => 'Supervisor', 'created_at' => now(),],
+            ['role_name' => 'Siswa', 'created_at' => now(),],
         ]);
 
         // Seed class_levels table with sample Indonesian data
         DB::table('class_levels')->insert([
-            ['cl_name' => 'Kelas 1'],
-            ['cl_name' => 'Kelas 2'],
-            ['cl_name' => 'Kelas 3'],
+            ['cl_name' => 'TK', 'created_at' => now(),],
+            ['cl_name' => 'SD', 'created_at' => now(),],
+            ['cl_name' => 'SMP', 'created_at' => now(),],
+
         ]);
 
         // Seed users table with sample Indonesian data
         DB::table('users')->insert([
             [
                 'name' => 'Budi Santoso',
-                'email' => 'budi@example.com',
+                'email' => 'budi@etabungan.com',
                 'password' => Hash::make('password123'),
                 'acc_unique_num' => 'AB12345678',
                 'acc_birthplace' => 'Jakarta',
@@ -37,14 +38,16 @@ class SampleDataSeeder extends Seeder
                 'acc_phone' => '081234567890',
                 'acc_religion' => 'Islam',
                 'acc_gender' => 'Laki-laki',
-                'acc_class' => 'Kelas 2',
+                'acc_class' => NULL,
                 'id_role' => 1,
                 'id_cl' => 2,
+                'nis' => NULL,
+                'created_at' => now(),
             ],
 
             [
                 'name' => 'Rina Dewi',
-                'email' => 'rina@example.com',
+                'email' => 'rina@etabungan.com',
                 'password' => Hash::make('password123'),
                 'acc_unique_num' => 'CD87654321',
                 'acc_birthplace' => 'Surabaya',
@@ -53,13 +56,15 @@ class SampleDataSeeder extends Seeder
                 'acc_phone' => '087654321098',
                 'acc_religion' => 'Kristen',
                 'acc_gender' => 'Perempuan',
-                'acc_class' => 'Kelas 3',
-                'id_role' => 2, // Assuming 'Pengguna' role
-                'id_cl' => 3, // Assuming 'Kelas 3'
+                'acc_class' => NULL,
+                'id_role' => 2,
+                'id_cl' => 2,
+                'nis' => NULL,
+                'created_at' => now(),
             ],
             [
                 'name' => 'Hendra Wijaya',
-                'email' => 'hendra@example.com',
+                'email' => 'hendra@etabungan.com',
                 'password' => Hash::make('password123'),
                 'acc_unique_num' => 'EF54321876',
                 'acc_birthplace' => 'Medan',
@@ -68,9 +73,11 @@ class SampleDataSeeder extends Seeder
                 'acc_phone' => '089876543210',
                 'acc_religion' => 'Islam',
                 'acc_gender' => 'Laki-laki',
-                'acc_class' => 'Kelas 2',
-                'id_role' => 2, // Assuming 'Pengguna' role
-                'id_cl' => 2, // Assuming 'Kelas 2'
+                'acc_class' => '1A',
+                'id_role' => 3,
+                'id_cl' => 2,
+                'nis' => 87367465,
+                'created_at' => now(),
             ],
             // Add more users here
         ]);
@@ -78,11 +85,11 @@ class SampleDataSeeder extends Seeder
         // Seed transactions table with sample data (you can add more data as needed)
         DB::table('transactions')->insert([
             [
-                'id_acc' => 1,
+                'tr_id' => mt_rand(1000000000, 9999999999),
+                'id_acc' => 3,
                 'tr_debt' => 1000,
-                'tr_credit' => 0,
-                'datecreated' => now(),
-                'datemodified' => NULL,
+                'tr_credit' => NULL,
+                'created_at' => now(),
             ],
             // Add more transactions here
         ]);

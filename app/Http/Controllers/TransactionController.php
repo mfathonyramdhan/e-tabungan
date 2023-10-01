@@ -24,7 +24,9 @@ class TransactionController extends Controller
 
         // Retrieve all transactions from the database 
 
-        return view('transactions.index', compact('transactions'));
+        $classLevels = ClassLevel::all();
+
+        return view('transactions.index', compact('transactions', 'classLevels'));
     }
 
     public function printTransaction(Transaction $transaction)
@@ -39,12 +41,27 @@ class TransactionController extends Controller
         $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
             ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
             ->select('transactions.*', 'users.name as acc_name', 'users.acc_class', 'class_levels.cl_name')
-            ->orderBy('datecreated', 'asc') // Order by datecreated in ascending order
+            ->orderBy('created_at', 'asc') // Order by datecreated in ascending order
             ->get()
             ->groupBy('id_acc'); // Group transactions by id_acc (account ID)
 
         return view('transactions.print', compact('transactions'));
     }
+
+    public function printUnit($unitName)
+    {
+        // Retrieve all transactions from the database and group them by account
+        $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
+            ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+            ->select('transactions.*', 'users.name as acc_name', 'users.acc_class', 'class_levels.cl_name')
+            ->where('class_levels.cl_name', '=', $unitName)
+            ->orderBy('created_at', 'asc') // Order by created_at in ascending order
+            ->get()
+            ->groupBy('id_acc'); // Group transactions by id_acc (account ID)
+
+        return view('transactions.print', compact('transactions'));
+    }
+
     public function printSelection(Request $request)
     {
         // Retrieve all transactions from the database and group them by account
@@ -55,21 +72,22 @@ class TransactionController extends Controller
         //     ->get()
         //     ->groupBy('id_acc'); // Group transactions by id_acc (account ID)
 
-        
+
         $daterange = $request->input('daterange');
-        $dates = explode(' - ' ,$daterange);
+        $dates = explode(' - ', $daterange);
         $minDate = strtotime($dates[0]);
         $MaxDate = strtotime($dates[1]);
         $awalCetak = date('Y-m-d', $minDate);
         $akhirCetak = date('Y-m-d', $MaxDate);
         $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
-        ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
-        ->select('transactions.*', 'users.name AS acc_name', 'users.acc_class', 'class_levels.cl_name')
-        ->whereBetween('datecreated', [$awalCetak, $akhirCetak])
-        ->orderBy('datecreated', 'asc') // Order by datecreated in ascending order
-        ->get()
-        ->groupBy('id_acc');
-        return view('transactions.printSelection', compact('transactions'));
+            ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+            ->select('transactions.*', 'users.name AS acc_name', 'users.acc_class', 'class_levels.cl_name')
+            ->whereBetween('transactions.created_at', ["$awalCetak 00:00:00", "$akhirCetak 23:59:59"])
+            ->orderBy('transactions.created_at', 'asc')
+            ->get()
+            ->groupBy('id_acc');
+
+        return view('transactions.printSelection', compact('transactions', 'awalCetak', 'akhirCetak'));
     }
     public function destroy(Transaction $transaction)
     {
@@ -81,8 +99,7 @@ class TransactionController extends Controller
     }
     public function create()
     {
-        // Assuming you need to fetch some data from other models for the form, you can do it here.
-        // For example, if you need a list of users and class levels for dropdowns:
+        // show semua user dengan role id 3 (role siswa)
         $users = User::where('id_role', 3)->get();
         $classLevels = ClassLevel::all();
 
@@ -91,20 +108,44 @@ class TransactionController extends Controller
 
     public function store(Request $request)
     {
-        // Generate a random 10-digit number for tr_id
+        // Generate random 10-digit tr_id
         $tr_id = mt_rand(1000000000, 9999999999);
 
-        // Create a new transaction and set its properties
+        // Detail tr
         $transaction = new Transaction();
         $transaction->tr_id = $tr_id;
         $transaction->id_acc = $request->input('id_acc');
         $transaction->tr_debt = $request->has('tr_debt') ? $request->input('tr_debt') : null;
         $transaction->tr_credit = $request->has('tr_credit') ? $request->input('tr_credit') : null;
+        $transaction->created_at = now();
 
-        // Save the transaction to the database
+        // Save ke db
         $transaction->save();
 
-        // Redirect back to the index page with a success message
+
+        return redirect()->route('transactions.printTransaction', ['transaction' => $tr_id]);
+
+
         return redirect()->route('transactions.index')->with('success', 'New transaction added successfully.');
+    }
+
+    public function storeKelas(Request $request)
+    {
+        if ($request->has('acc_class')) {
+            $kelasName = $request->input('acc_class');
+        }
+
+        // Retrieve all transactions from the database and group them by account
+        $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
+            ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+            ->select('transactions.*', 'users.name as acc_name', 'users.acc_class', 'class_levels.cl_name')
+            ->where('users.acc_class', '=', $kelasName)
+            ->orderBy('created_at', 'asc') // Order by created_at in ascending order
+            ->get()
+            ->groupBy('id_acc'); // Group transactions by id_acc (account ID)
+
+
+
+        return view('transactions.print', compact('transactions'));
     }
 }

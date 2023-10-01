@@ -12,21 +12,25 @@
                     <form action="{{ route('transactions.store') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="id_acc" class="form-label">Akun</label>
-                            <select class="form-select" id="id_acc" name="id_acc" required>
-                                <option selected disabled>Pilih Akun</option>
+                            <label for="id_acc" class="form-label">Siswa</label>
+                            <select class="form-select" id="siswa-select" name="id_acc" data-live-search="true">
+                                <option selected disabled>Pilih Siswa</option>
                                 @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}">NIS. {{ $user->nis }} | {{ $user->name }}</option>
                                 @endforeach
                             </select>
                         </div>
+
+
+
+
 
                         <div class="mb-3">
                             <label for="qqq" class="form-label">Jenis Transaksi</label>
                             <select class="form-select" id="qqq" name="qqq">
                                 <option selected disabled>Pilih Jenis Transaksi</option>
                                 <option value="1">Tabungan</option>
-                                <option value="2">Pengambilan</option>
+                                <option value="2">Penarikan</option>
                             </select>
                         </div>
 
@@ -49,7 +53,13 @@
 
                         <!-- Add other form fields here -->
                         <button type="submit" class="btn btn-primary">Submit</button>
+
+
                     </form>
+
+
+
+
                 </div>
             </div>
         </div>
@@ -92,8 +102,15 @@
         // Call the toggleFields function initially to set the initial state
         const selectedOption = $("#qqq").val();
         toggleFields(selectedOption);
+
+        $('#siswa-select').select2();
+
     });
 </script>
+
+
+
+
 
 
 @endsection

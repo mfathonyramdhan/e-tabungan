@@ -50,14 +50,6 @@
                             <label for="acc_class" class="form-label">Kelas</label>
                             <select class="form-select" id="acc_class" name="acc_class">
 
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
                             </select>
                         </div>
                         <div class="mb-3">

@@ -22,7 +22,14 @@
 
                     <div class="row text-center">
                         <h3> <strong> E-Tabungan Pendidikan Integral Hidayatullah </strong></h3>
-                        <h3>Histori Transaksi Lengkap</h3>
+                        @php
+                        // Format the date range in the Indonesian date format
+                        $formattedAwalCetak = date('d/m/Y', strtotime($awalCetak));
+                        $formattedAkhirCetak = date('d/m/Y', strtotime($akhirCetak));
+                        @endphp
+
+                        <h3>Histori Transaksi <br> {{ $formattedAwalCetak }} s/d {{ $formattedAkhirCetak }}</h3>
+
                     </div>
                     <ul class="list-group">
                         @foreach($transactions as $accountId => $accountTransactions)
@@ -49,7 +56,7 @@
                                     <tr>
                                         <td>{{ $counter }}</td>
                                         <td>
-                                            {{ $transaction->datecreated ? \Carbon\Carbon::parse($transaction->datecreated)->translatedFormat('l, d F Y, H:i') : '-' }}
+                                            {{ $transaction->created_at ? \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('l, d F Y, H:i') : '-' }}
                                         </td>
                                         <td>{{ $transaction->tr_id }}</td>
                                         <td>

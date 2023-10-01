@@ -17,27 +17,27 @@
                         <div class="modal fade" id="basicModal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                <form class="form" method="POST" action="{{ route('transactions.printSelectionTransaction') }}">
-                                @csrf
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        
+                                    <form class="form" method="POST" action="{{ route('transactions.printSelectionTransaction') }}">
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+
                                             <div class="example">
                                                 <p class="mb-1">Date Range Pick</p>
                                                 <input class="form-control input-daterange-datepicker" type="text" name="daterange" value="01/01/2023 - 01/31/2023">
                                             </div>
-                                        
-                                    </div>
-                                    
-                                
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </div>
+
+                                        </div>
+
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
 
 
                                     <td>
-                                        {{ $transaction->datecreated ? \Carbon\Carbon::parse($transaction->datecreated)->translatedFormat('l, d F Y, H:i') : '-' }}
+                                        {{ $transaction->created_at ? \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('l, d F Y, H:i') : '-' }}
                                     </td>
                                     <!-- <td>
                                         {{ $transaction->datemodified ? \Carbon\Carbon::parse($transaction->datemodified)->translatedFormat('l, d F Y, H:i') : '-' }}
@@ -121,9 +121,73 @@
                         </table>
                     </div>
                 </div>
+
+
                 <div class="card-footer border-0 pt-0">
-                    <a href="{{ route('transactions.print') }}" class="btn btn-primary" target="_blank">
-                        <i class="fa fa-print"></i> Print Semua HIstori Transaksi
+
+                    <!-- print per unit -->
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-print"></i> Print Per Satdik
+                        </button>
+                        <div class="dropdown-menu" style="">
+                            @foreach($transactions as $key => $transaction)
+
+                            <a class="dropdown-item" href="{{ route('transactions.printUnit', ['unitName' =>  $transaction->cl_name]) }}" target="_blank">{{ $transaction->cl_name }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i class="fa fa-print"></i> Print Per Kelas</button>
+                    <div class="modal fade" id="exampleModalCenter">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Print Per Kelas</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('transactions.storeKelas') }}" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label for="id_cl" class="form-label">Satuan Pendidikan</label>
+                                                    <select class="form-select" id="id_cl" name="id_cl" required>
+                                                        <option selected disabled>Pilih Satuan Pendidikan</option>
+
+                                                        @foreach($classLevels as $classLevel)
+                                                        <option value="{{ $classLevel->cl_id }}">{{ $classLevel->cl_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="acc_class" class="form-label">Kelas</label>
+                                                    <select class="form-select" id="acc_class" name="acc_class">
+
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Print</button>
+
+                                            </div>
+
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <a href="{{ route('transactions.print') }}" class="btn btn-success" target="_blank">
+                        <i class="fa fa-print"></i> Print Per Siswa
+                    </a>
+                    <a href="{{ route('transactions.print') }}" class="btn btn-warning" target="_blank">
+                        <i class="fa fa-print"></i> Print Semua Histori Transaksi
                     </a>
                 </div>
             </div>

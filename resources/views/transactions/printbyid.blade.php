@@ -116,21 +116,21 @@ use Illuminate\Support\Facades\DB;
         @php
         $lastTransaction = DB::table('transactions')
         ->where('id_acc', $transaction->id_acc)
-        ->where('datecreated', '<', $transaction->datecreated)
-            ->orderBy('datecreated', 'desc')
+        ->where('created_at', '<', $transaction->created_at)
+            ->orderBy('created_at', 'desc')
             ->first();
 
             $lastAmount = $lastTransaction ? ($lastTransaction->tr_debt ?? 0) - ($lastTransaction->tr_credit ?? 0) : 0;
             @endphp
 
-            <p class="centered">Saldo {{ $lastTransaction ? 'Terakhir' : 'Awal' }} {!! $lastTransaction ? "<br> (".\Carbon\Carbon::parse($lastTransaction->datecreated)->translatedFormat('l, d F Y, H:i').")" : "" !!} : <br> Rp {{ number_format($lastAmount, 0, ',', '.') }}</p>
+            <p class="centered">Saldo {{ $lastTransaction ? 'Terakhir' : 'Awal' }} {!! $lastTransaction ? "<br> (".\Carbon\Carbon::parse($lastTransaction->created_at)->translatedFormat('l, d F Y, H:i').")" : "" !!} : <br> Rp {{ number_format($lastAmount, 0, ',', '.') }}</p>
             <hr>
 
             <hr>
 
 
             <p class="centered">
-                {{ $transaction->datecreated ? \Carbon\Carbon::parse($transaction->datecreated)->translatedFormat('l, d F Y, H:i') : '-' }}
+                {{ $transaction->created_at ? \Carbon\Carbon::parse($transaction->created_at)->translatedFormat('l, d F Y, H:i') : '-' }}
                 <br>
                 @if ($transaction->tr_credit === null)
                 Menabung sebesar : <br> Rp {{ number_format($transaction->tr_debt, 0, ',', '.') }}

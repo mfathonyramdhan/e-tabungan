@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 
 class DashboardController extends Controller
 {
-    
+
     public function index()
     {
         $user = Auth::user(); // Get the authenticated user
@@ -31,8 +31,8 @@ class DashboardController extends Controller
             ->where('id_role', '!=', 3)
             ->count();
         // cahrt Bar logic
-        $currentMonth = Transaction::orderBy('datecreated', 'DESC')->first();
-        $myDate = Carbon::parse($currentMonth->datecreated);
+        $currentMonth = Transaction::orderBy('created_at', 'DESC')->first();
+        $myDate = Carbon::parse($currentMonth->created_at);
         $endDate = strtotime($myDate);
         $month = date('m', $endDate);
         $minDate = Carbon::parse($myDate)->subMonths(5)->toDateString();
@@ -41,45 +41,43 @@ class DashboardController extends Controller
         $starDate1 = date($date1->startOfMonth());
         $endDate1 = date($date2->endOfMonth());
         $dataBar1 = Transaction::select(DB::raw("SUM(tr_debt) AS debt"))
-        ->whereBetween('datecreated', [$starDate1 , $endDate1 ])
-        ->groupBy(DB::raw("MONTH(datecreated)"))
-        ->get();
+            ->whereBetween('created_at', [$starDate1, $endDate1])
+            ->groupBy(DB::raw("MONTH(created_at)"))
+            ->get();
         $resultArray = $dataBar1->toArray();
         $dataBr = Arr::flatten($resultArray);
-        $newDateTime = Transaction::select("datecreated")
-            ->whereBetween('datecreated', [$starDate1 , $endDate1 ])
-            ->groupBy(DB::raw("MONTH(datecreated)"))
+        $newDateTime = Transaction::select("created_at")
+            ->whereBetween('created_at', [$starDate1, $endDate1])
+            ->groupBy(DB::raw("MONTH(created_at)"))
             ->get();
-            
-            $resultArray2 = $newDateTime->toArray();
-            $str = Arr::flatten($resultArray2);
+
+        $resultArray2 = $newDateTime->toArray();
+        $str = Arr::flatten($resultArray2);
         $count = $newDateTime->count();
-        for ($i=0; $i <$count ; $i++) { 
+        for ($i = 0; $i < $count; $i++) {
 
             $dataYAxis[$i] = Carbon::parse($str[$i])->translatedFormat('F');
-            
         }
         // $dataYAxis = Arr::flatten($dataBulan);
         // end chart bar
         // dd($dataBulan);
-        $currentWeek = Transaction::orderBy('datecreated', 'DESC')->first();
-        $myWeek = Carbon::parse($currentWeek->datecreated);
+        $currentWeek = Transaction::orderBy('created_at', 'DESC')->first();
+        $myWeek = Carbon::parse($currentWeek->created_at);
         $endWeek = strtotime($myWeek);
         $startDay1 = date($myWeek->startOfWeek());
         $endDay1 = date($myWeek->endOfWeek());
-        $dataChartLine = Transaction::select("tr_debt AS debt", "datecreated")
-        ->whereBetween('datecreated', ["2023-09-18 18:53:11", "2023-09-24 18:53:11" ])
-        ->groupBy(DB::raw("DAY(datecreated)"))
-        ->get();
+        $dataChartLine = Transaction::select("tr_debt AS debt", "created_at")
+            ->whereBetween('created_at', ["2023-09-18 18:53:11", "2023-09-24 18:53:11"])
+            ->groupBy(DB::raw("DAY(created_at)"))
+            ->get();
         $resultArray2 = $dataChartLine->toArray();
         $yAxis = Arr::flatten($resultArray2);
         // dd($yAxis);
-        for ($i=0; $i <=5 ; $i++) { 
+        for ($i = 0; $i <= 5; $i++) {
             $newDateTime = Carbon::parse($startDay1)->addDays($i)->toDateString();
             $str = strtotime($newDateTime);
-            
+
             $dayArray[$i] = Carbon::parse($str)->translatedFormat('l');
-            
         }
         $xAxis = Arr::flatten($dayArray);
         // end chart bar
@@ -99,8 +97,6 @@ class DashboardController extends Controller
         $formattedTotalPenarikan = 'Rp ' . number_format($totalPenarikan, 0, ',', '.');
 
 
-        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor','dataBr','dataYAxis', 'xAxis', 'yAxis'));
+        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor', 'dataBr', 'dataYAxis', 'xAxis', 'yAxis'));
     }
-
-    
 }
