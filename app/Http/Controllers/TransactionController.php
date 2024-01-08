@@ -62,6 +62,21 @@ class TransactionController extends Controller
         return view('transactions.print', compact('transactions'));
     }
 
+
+    public function printKelas($kelasName)
+    {
+        // Retrieve all transactions from the database and group them by account
+        $transactions = Transaction::join('users', 'transactions.id_acc', '=', 'users.id')
+            ->join('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+            ->select('transactions.*', 'users.name as acc_name', 'users.acc_class', 'class_levels.cl_name')
+            ->where('class_levels.cl_name', '=', $kelasName)
+            ->orderBy('created_at', 'asc') // Order by created_at in ascending order
+            ->get()
+            ->groupBy('id_acc'); // Group transactions by id_acc (account ID)
+
+        return view('transactions.print', compact('transactions'));
+    }
+
     public function printSelection(Request $request)
     {
         // Retrieve all transactions from the database and group them by account

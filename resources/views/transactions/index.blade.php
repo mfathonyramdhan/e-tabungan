@@ -58,7 +58,9 @@
                                     <th>Penarikan</th>
                                     <th>Waktu Transaksi</th>
                                     <!-- <th>Diupdate Pada</th> -->
+                                    @if(Auth::user()->id_role == 1)
                                     <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,6 +83,7 @@
                                     <!-- <td>
                                         {{ $transaction->datemodified ? \Carbon\Carbon::parse($transaction->datemodified)->translatedFormat('l, d F Y, H:i') : '-' }}
                                     </td> -->
+                                    @if(Auth::user()->id_role == 1)
 
                                     <td>
                                         <div class="d-flex">
@@ -100,7 +103,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                    </td>
+                                    </td> @endif
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -115,7 +118,9 @@
                                     <th>Penarikan</th>
                                     <th>Waktu Transaksi</th>
                                     <!-- <th>Diupdate Pada</th> -->
+                                    @if(Auth::user()->id_role == 1)
                                     <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </tfoot>
                         </table>
@@ -129,11 +134,11 @@
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa fa-print"></i> Print Per Satdik
                         </button>
-                        <div class="dropdown-menu" style="">
-                            @foreach($transactions as $key => $transaction)
+                        <div class="dropdown-menu">
 
-                            <a class="dropdown-item" href="{{ route('transactions.printUnit', ['unitName' =>  $transaction->cl_name]) }}" target="_blank">{{ $transaction->cl_name }}</a>
-                            @endforeach
+                            <a class="dropdown-item" href="{{ route('transactions.printUnit', ['unitName' =>  'TK']) }}" target="_blank">TK</a>
+                            <a class="dropdown-item" href="{{ route('transactions.printUnit', ['unitName' =>  'SD']) }}" target="_blank">SD</a>
+                            <a class="dropdown-item" href="{{ route('transactions.printUnit', ['unitName' =>  'SMP']) }}" target="_blank">SMP</a>
                         </div>
                     </div>
 
@@ -147,7 +152,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="{{ route('transactions.storeKelas') }}" method="POST">
+                                    <form action="{{ route('transactions.printKelas') }}" method="POST">
                                         @csrf
                                         <div class="row">
                                             <div class="col">

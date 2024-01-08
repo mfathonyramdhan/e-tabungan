@@ -21,6 +21,17 @@ class UsersController extends Controller
         return view('users.index', compact('users'));
     }
 
+    public function siswa()
+    {
+        // Use the 'leftJoin' method to perform SQL LEFT JOINs between 'users', 'class_levels', and 'roles' tables
+        $users = User::leftJoin('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
+            ->leftJoin('roles', 'users.id_role', '=', 'roles.role_id')
+            ->select('users.*', 'class_levels.cl_name', 'roles.role_name')
+            ->get();
+
+        return view('users.siswa', compact('users'));
+    }
+
 
 
     public function create()
@@ -35,7 +46,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        // Create a new user and set its properties
+        // Create a new user and set its properties 
         $user = new User();
         $user->name = $request->input('name');
 
@@ -53,6 +64,31 @@ class UsersController extends Controller
             $user->acc_class = $request->input('acc_class');
         }
 
+        if ($request->has('acc_nis')) {
+            $user->nis = $request->input('acc_nis');
+        }
+
+        if ($request->has('ta')) {
+            $user->ta = $request->input('ta');
+        }
+
+        if ($request->has('status')) {
+            $user->status = $request->input('status');
+        }
+
+        if ($request->has('acc_parents')) {
+            $user->acc_parents = $request->input('acc_parents');
+        }
+
+        if ($request->has('acc_address')) {
+            $user->acc_address = $request->input('acc_address');
+        }
+
+        if ($request->has('acc_phone')) {
+            $user->acc_phone = $request->input('acc_phone');
+        }
+
+
         $user->acc_gender = $request->input('acc_gender');
 
         // Check if the password is provided and hash it before storing it
@@ -64,7 +100,7 @@ class UsersController extends Controller
         $user->save();
 
         // Redirect back to the index page with a success message
-        return redirect()->route('users.index')->with('success', 'New user added successfully.');
+        return redirect()->route('users.create')->with('success', 'New user added successfully.');
     }
 
     public function destroy($id)

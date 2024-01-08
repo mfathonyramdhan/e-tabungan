@@ -11,6 +11,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "maatwebsite/excel": "^1.1",
         "nesbot/carbon": "^2.70",
         "realrashid/sweet-alert": "^7.1",
         "snapappointments/bootstrap-select": "^1.13"

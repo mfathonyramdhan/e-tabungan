@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('class-levels/{id}', 'App\Http\Controllers\ClassLevelController@destroy')->name('class-levels.destroy');
     Route::get('/users', [UsersController::class, 'index'])->name('users.index');
     Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
+    Route::get('users/siswa', [UsersController::class, 'siswa'])->name('users.siswa');
+
     Route::post('users', [UsersController::class, 'store'])->name('users.store');
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
 });

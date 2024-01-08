@@ -16,7 +16,7 @@
                             <select class="form-select" id="siswa-select" name="id_acc" data-live-search="true">
                                 <option selected disabled>Pilih Siswa</option>
                                 @foreach($users as $user)
-                                <option value="{{ $user->id }}">NIS. {{ $user->nis }} | {{ $user->name }}</option>
+                                <option value="{{ $user->id }}">{{ $user->name }} | NIS. {{ $user->nis }} </option>
                                 @endforeach
                             </select>
                         </div>

@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data Akun</h4>
+                    <h4 class="card-title">Admin & Supervisor</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -18,24 +18,27 @@
                                     <th>Role</th>
 
                                     <th>Email</th>
-                                    <th>Satdik</th>
-                                    <th>Kelas</th>
+
                                     <th>Jenis Kelamin</th>
+                                    @if(Auth::user()->id_role == 1)
                                     <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach($users as $key => $user)
+                                @if($user->id_role != 3)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $user->name ?? '-' }}</td>
                                     <td>{{ $user->role_name ?? '-' }}</td>
 
                                     <td>{{ $user->email ?? '-' }}</td>
-                                    <td>{{ $user->cl_name ?? '-' }}</td>
-                                    <td>{{ $user->acc_class ?? '-' }}</td>
+
                                     <td>{{ $user->acc_gender ?? '-' }}</td>
+                                    @if(Auth::user()->id_role == 1)
+
                                     <td>
                                         <div class="d-flex">
                                             <!-- Add the edit and delete links here -->
@@ -50,8 +53,8 @@
                                                 </button>
                                             </form>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </td>@endif
+                                </tr>@endif
                                 @endforeach
                             </tbody>
 
@@ -62,10 +65,11 @@
                                     <th>Role</th>
 
                                     <th>Email</th>
-                                    <th>Satdik</th>
-                                    <th>Kelas</th>
+
                                     <th>Jenis Kelamin</th>
+                                    @if(Auth::user()->id_role == 1)
                                     <th>Aksi</th>
+                                    @endif
                                 </tr>
                             </tfoot>
 

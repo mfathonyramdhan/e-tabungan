@@ -175,24 +175,29 @@
                             <li>
                                 <a href="{{ route('class-levels') }}">Data Satuan Pendidikan</a>
                             </li>
+                            @if(Auth::user()->id_role == 1)
                             <li>
                                 <a href="{{ route('class-levels.create') }}">Tambah Satuan Pendidikan</a>
                             </li>
+                            @endif
                         </ul>
                     </li>
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="fas fa-users"></i>
-                            <span class="nav-text">Akun</span>
+                            <span class="nav-text">Data Akun</span>
                         </a>
                         <ul aria-expanded="false">
                             <li>
-                                <a href="{{ route('users.index') }}">Data Akun</a>
+                                <a href="{{ route('users.index') }}">Admin & Supervisor</a>
+                                <a href="{{ route('users.siswa') }}">Siswa</a>
                             </li>
+                            @if(Auth::user()->id_role == 1)
                             <li>
                                 <a href="{{ route('users.create') }}">Tambah Akun</a>
                             </li>
+                            @endif
                         </ul>
                     </li>
 
@@ -205,9 +210,11 @@
                             <li>
                                 <a href="{{ route('transactions.index') }}">Histori Transaksi</a>
                             </li>
+                            @if(Auth::user()->id_role == 1)
                             <li>
                                 <a href="{{ route('transactions.create') }}">Tambah Transaksi</a>
                             </li>
+                            @endif
                         </ul>
                     </li>
 
@@ -314,11 +321,18 @@
             var emailAndPassword = $('#emailAndPassword');
             var emailInput = $('#email');
             var passwordInput = $('#password');
+            var satdik = $('#satdik');
+            var kelas = $('#kelas');
+            var nis = $('#nis');
+            var ta = $('#ta');
+            var status = $('#status');
+            var acc_parents = $('#acc_parents');
+
 
             // Get the element for the id_role field
             var idRoleInput = $('#id_role');
 
-            // Function to show or hide email and password fields based on selected id_role
+            // Function to show or hide email and password fields based on selected id_role 
             function toggleEmailAndPassword() {
                 var selectedRoleId = parseInt(idRoleInput.val());
 
@@ -328,13 +342,32 @@
                     emailAndPassword.show();
                     emailInput.prop('required', true);
                     passwordInput.prop('required', true);
-
+                    satdik.hide();
+                    kelas.hide();
+                    nis.hide();
+                    ta.hide();
+                    status.hide();
+                    acc_parents.hide();
                 } else if (selectedRoleId == 2) {
                     emailAndPassword.show();
                     emailInput.prop('required', true);
                     passwordInput.prop('required', true);
+                    satdik.hide();
+                    kelas.hide();
+                    nis.hide();
+                    ta.hide();
+                    status.hide();
+                    acc_parents.hide();
+
                 } else {
                     emailAndPassword.hide();
+                    satdik.show();
+                    kelas.show();
+                    nis.show();
+                    ta.show();
+                    status.show();
+                    acc_parents.show();
+
                 }
             }
 

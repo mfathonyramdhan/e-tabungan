@@ -1,12 +1,12 @@
 @extends('layouts.dashboard')
-@section('title', 'Data Sat. Pendidikan')
+@section('title', 'Data Akun')
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Data Satuan Pendidikan</h4>
+                    <h4 class="card-title">Siswa</h4>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -14,52 +14,67 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Satuan Pendidikan</th>
-
+                                    <th>Nama</th>
+                                    <th>Role</th>
+                                    <th>Email</th>
+                                    <th>Satdik</th>
+                                    <th>Kelas</th>
+                                    <th>Jenis Kelamin</th>
                                     @if(Auth::user()->id_role == 1)
                                     <th>Aksi</th>
                                     @endif
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($classLevels as $key => $classLevel)
+
+                                @foreach($users as $key => $user)
+                                @if($user->id_role == 3)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $classLevel->cl_name }}</td>
+                                    <td>{{ $user->name ?? '-' }}</td>
+                                    <td>{{ $user->role_name ?? '-' }}</td>
 
+                                    <td>{{ $user->email ?? '-' }}</td>
+                                    <td>{{ $user->cl_name ?? '-' }}</td>
+                                    <td>{{ $user->acc_class ?? '-' }}</td>
+                                    <td>{{ $user->acc_gender ?? '-' }}</td>\
                                     @if(Auth::user()->id_role == 1)
+
                                     <td>
                                         <div class="d-flex">
-                                            <!-- Pass the 'id' parameter to the edit route -->
-
-
-                                            <a href="{{ route('class-levels.edit', ['id' => $classLevel->cl_id]) }}" class="btn btn-primary shadow sharp me-1" style="padding-left: 10px; padding-right: 10px;">
+                                            <!-- Add the edit and delete links here -->
+                                            <!-- <a href="#" class="btn btn-primary shadow sharp me-1" style="padding-left: 10px; padding-right: 10px;">
                                                 <i class="fas fa-pencil-alt"></i> &nbsp;Edit
-                                            </a>
-
-
-                                            <form action="{{ route('class-levels.destroy', ['id' => $classLevel->cl_id]) }}" method="POST" onsubmit="return confirm('Menghapus data ini juga akan mengosongi data satuan pendidikan pada data akun yang bersangkutan. Apakah anda yakin ? ')">
+                                            </a> -->
+                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Menghapus data akun ini juga akan menghapus data transaksi yang dimiliki akun ini. Apakah anda yakin ?')">
                                                 @csrf
-                                                @method('DELETE')
+                                                @method('DELETE') <!-- Add the method spoofing for DELETE request -->
                                                 <button type="submit" class="btn btn-danger shadow sharp" style="padding-left: 10px; padding-right: 10px;">
                                                     <i class="fa fa-trash"></i>&nbsp;Hapus
                                                 </button>
                                             </form>
                                         </div>
-                                    </td>
-                                    @endif
-                                </tr>
+                                    </td>@endif
+                                </tr>@endif
                                 @endforeach
                             </tbody>
+
                             <tfoot>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Satuan Pendidikan</th>
+                                    <th>Nama</th>
+                                    <th>Role</th>
+
+                                    <th>Email</th>
+                                    <th>Satdik</th>
+                                    <th>Kelas</th>
+                                    <th>Jenis Kelamin</th>
                                     @if(Auth::user()->id_role == 1)
                                     <th>Aksi</th>
                                     @endif
                                 </tr>
                             </tfoot>
+
                         </table>
                     </div>
                 </div>
