@@ -8,13 +8,24 @@ use Illuminate\Http\Request;
 use App\Models\Role;
 use App\Models\ClassLevel;
 
+
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class UsersController extends Controller
 {
+
+    public function export()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
     public function index()
     {
         // Use the 'leftJoin' method to perform SQL LEFT JOINs between 'users', 'class_levels', and 'roles' tables
         $users = User::leftJoin('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
             ->leftJoin('roles', 'users.id_role', '=', 'roles.role_id')
+            ->where('roles.role_id', '!=', 3)
             ->select('users.*', 'class_levels.cl_name', 'roles.role_name')
             ->get();
 
@@ -26,6 +37,7 @@ class UsersController extends Controller
         // Use the 'leftJoin' method to perform SQL LEFT JOINs between 'users', 'class_levels', and 'roles' tables
         $users = User::leftJoin('class_levels', 'users.id_cl', '=', 'class_levels.cl_id')
             ->leftJoin('roles', 'users.id_role', '=', 'roles.role_id')
+            ->where('roles.role_id', '=', 3)
             ->select('users.*', 'class_levels.cl_name', 'roles.role_name')
             ->get();
 

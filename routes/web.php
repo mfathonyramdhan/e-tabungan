@@ -58,6 +58,9 @@ Route::middleware('auth')->group(function () {
     Route::get('users/create', [UsersController::class, 'create'])->name('users.create');
     Route::get('users/siswa', [UsersController::class, 'siswa'])->name('users.siswa');
 
+    Route::get('users/export', [UsersController::class, 'export'])->name('users.export');
+
+
     Route::post('users', [UsersController::class, 'store'])->name('users.store');
     Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
 });
