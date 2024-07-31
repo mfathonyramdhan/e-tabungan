@@ -96,7 +96,12 @@ class DashboardController extends Controller
 
         $formattedTotalPenarikan = 'Rp ' . number_format($totalPenarikan, 0, ',', '.');
 
+<<<<<<< Updated upstream
 
         return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor', 'dataBr', 'dataYAxis', 'xAxis', 'yAxis'));
+=======
+        // dd($dayArray);
+        return view('dashboard.index', compact('user', 'formattedTotalSaldoTabungan', 'totalSiswa', 'formattedTotalTabungan', 'formattedTotalPenarikan', 'totalAdminSupervisor','dataBr','dataYAxis', 'xAxis', 'yAxis'));
+>>>>>>> Stashed changes
     }
 }
